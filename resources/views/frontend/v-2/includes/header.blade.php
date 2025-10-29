@@ -122,6 +122,11 @@
 				</div>
                 <ul class="manu-list">
                     <li class="manu-list-item">
+                        <a href="{{ url('/') }}" class="manu-list-item-link">
+                            Home
+                        </a>
+                    </li>
+                    <li class="manu-list-item">
                         <a href="{{ url('/shops') }}" class="manu-list-item-link">
                             Shop
                         </a>
