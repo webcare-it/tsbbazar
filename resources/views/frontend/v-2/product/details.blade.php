@@ -9,7 +9,7 @@
         <section class="product-details-section">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-9 col-md-12">
+                    <div class="col-lg-12 col-md-12">
                         <div class="product-details-wrapper">
                             <div class="row">
                                 <div class="col-lg-7 col-md-7">
@@ -37,14 +37,14 @@
                                         </h3>
                                         @if ($details->discount_price != null)
                                         <div class="product-price">
-                                            <span>{{ $details->discount_price}}  Tk.</span>
-                                            <span class="" style="color: #f74b81;">
-                                                <del>{{ $details->regular_price}} Tk.</del>
+                                            <span class="discount-price">{{ $details->discount_price}} Tk.</span>
+                                            <span class="regular-price" style="color: #f74b81; text-decoration: line-through;">
+                                                {{ $details->regular_price}} Tk.
                                             </span>
                                         </div>
                                         @else
                                         <div class="product-price">
-                                            <span>{{ $details->regular_price}}  Tk.</span>
+                                            <span class="regular-price">{{ $details->regular_price}} Tk.</span>
                                         </div>
                                         @endif
                                         <p class="shor-description">
@@ -169,32 +169,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-12">
-                        <div class="product-details-sidebar">
-                            <div class="product-details-categoris">
-                                <h3 class="product-details-title">
-                                    Category
-                                </h3>
-                                @foreach ($categories as $category)
-                                <a href="{{url('products/'.$category->slug)}}" class="category-item-outer">
-                                    <img src="{{asset('category/'.$category->image)}}" alt="category image">
-                                    {{$category->name}}
-                                </a>
-                                @endforeach
-                            </div>
-                            <div class="banner-item-outer side-banner" >
-                                <img src="{{asset('category/'.$details->category->image)}}" alt="banner image">
-                                <div class="banner-content">
-                                    <h4>
-                                        {{$details->category->name}}
-                                    </h4>
-                                    <a href="{{url('products/'.$details->category->slug)}}" class="shop-now-btn">
-                                        Shop Now <i class="fas fa-long-arrow-alt-right"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -251,7 +225,9 @@
     </div>
     <div style="display: none">
         <input type="text" id="product_name" value="{{ $details->name }}">
-        <input type="text" id="price" value="{{ $details->regular_price }}">
+        <input type="text" id="price" value="{{ $details->discount_price ?? $details->regular_price }}">
+        <input type="text" id="regular_price" value="{{ $details->regular_price }}">
+        <input type="text" id="discount_price" value="{{ $details->discount_price ?? '' }}">
         <input type="text" id="product_id" value="{{ $details->id }}">
         <input type="text" id="category" value="{{ $details->category->name }}">
     </div>
