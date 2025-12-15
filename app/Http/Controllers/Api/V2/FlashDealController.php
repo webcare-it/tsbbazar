@@ -7,6 +7,7 @@ use App\Http\Resources\V2\ProductCollection;
 use App\Http\Resources\V2\ProductMiniCollection;
 use App\Models\FlashDeal;
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class FlashDealController extends Controller
 {
@@ -16,7 +17,14 @@ class FlashDealController extends Controller
         return new FlashDealCollection($flash_deals);
     }
 
-    public function products($id){
+    public function products($id, Request $request){
+        // Get page and per_page from request, with defaults
+        $page = $request->get('page', 1);
+        $perPage = $request->get('per_page', 10);
+        
+        // Ensure perPage is within reasonable limits
+        $perPage = min(max($perPage, 10), 100);
+        
         $flash_deal = FlashDeal::with('flash_deal_products.product')->find($id);
         
         // Return both flash deal data and products data
@@ -31,7 +39,15 @@ class FlashDealController extends Controller
             }
         }
         
-        $productsData = new ProductMiniCollection($products);
+        // Paginate the products collection
+        $paginatedProducts = new \Illuminate\Pagination\LengthAwarePaginator(
+            $products->forPage($page, $perPage),
+            $products->count(),
+            $perPage,
+            $page
+        );
+        
+        $productsData = new ProductMiniCollection($paginatedProducts);
         
         return response()->json([
             'flash_deal' => $flashDealData,
