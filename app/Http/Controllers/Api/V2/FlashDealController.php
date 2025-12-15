@@ -20,10 +20,10 @@ class FlashDealController extends Controller
     public function products($id, Request $request){
         // Get page and per_page from request, with defaults
         $page = $request->get('page', 1);
-        $perPage = $request->get('per_page', 10);
+        $perPage = $request->get('per_page', 2);
         
         // Ensure perPage is within reasonable limits
-        $perPage = min(max($perPage, 10), 100);
+        $perPage = min(max($perPage, 2), 100);
         
         $flash_deal = FlashDeal::with('flash_deal_products.product')->find($id);
         
