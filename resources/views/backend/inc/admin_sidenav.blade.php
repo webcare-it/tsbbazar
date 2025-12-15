@@ -888,11 +888,11 @@
                                     <span class="aiz-side-nav-text">{{translate('Payment Methods')}}</span>
                                 </a>
                             </li> --}}
-                            <li class="aiz-side-nav-item">
+                            {{-- <li class="aiz-side-nav-item">
                                 <a href="{{ route('file_system.index') }}" class="aiz-side-nav-link">
                                     <span class="aiz-side-nav-text">{{translate('File System & Cache Configuration')}}</span>
                                 </a>
-                            </li>
+                            </li> --}}
                             <li class="aiz-side-nav-item">
                                 <a href="{{ route('social_login.index') }}" class="aiz-side-nav-link">
                                     <span class="aiz-side-nav-text">{{translate('Social media Logins')}}</span>
