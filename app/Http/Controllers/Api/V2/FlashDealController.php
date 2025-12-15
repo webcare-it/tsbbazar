@@ -20,15 +20,13 @@ class FlashDealController extends Controller
     public function products($id, Request $request){
         // Get page and per_page from request, with defaults
         $page = $request->get('page', 1);
-        $perPage = $request->get('per_page', 2);
+        $perPage = $request->get('per_page', 10);
         
         // Ensure perPage is within reasonable limits
-        $perPage = min(max($perPage, 2), 100);
+        $perPage = min(max($perPage, 10), 100);
         
         $flash_deal = FlashDeal::with('flash_deal_products.product')->find($id);
         
-        // Return both flash deal data and products data
-        $flashDealData = new FlashDealCollection(collect([$flash_deal]));
         $products = collect();
         
         if ($flash_deal && $flash_deal->flash_deal_products) {
@@ -47,11 +45,17 @@ class FlashDealController extends Controller
             $page
         );
         
-        $productsData = new ProductMiniCollection($paginatedProducts);
+        // Return both flash deal data and products data
+        $flashDealData = new FlashDealCollection(collect([$flash_deal]));
         
+        // Get the paginated response from ProductMiniCollection
+        $productCollection = new ProductMiniCollection($paginatedProducts);
+        $productResponse = $productCollection->response($request)->getData(true);
+        
+        // Structure the response to match the desired format
         return response()->json([
-            'flash_deal' => $flashDealData,
-            'products' => $productsData
+            'flash_deal' => $flashDealData->response($request)->getData(true),
+            'products' => $productResponse
         ]);
     }
 }
