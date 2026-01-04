@@ -91,7 +91,7 @@ export const CategoryProductsSection = () => {
           }
 
           return (
-            <section key={category?.categoryId} className="mb-10 md:mb-20">
+            <section key={category?.categoryId}>
               <SectionTitle
                 title={category?.name}
                 linkText={"View All"}
