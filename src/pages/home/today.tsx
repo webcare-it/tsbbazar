@@ -1,6 +1,7 @@
 import type { HomePropsType } from "@/type";
 
-import { ProductSection } from "@/components/common/product-section";
+import { HomeSectionTitle } from "@/components/common/section-title";
+import { ProductSlider } from "@/components/common/products-slider";
 
 export const TodaysDealSection = ({ isLoading, products }: HomePropsType) => {
   return (
@@ -8,11 +9,8 @@ export const TodaysDealSection = ({ isLoading, products }: HomePropsType) => {
       className={`container mx-auto ${
         products?.length === 0 && !isLoading && "hidden"
       }`}>
-      <ProductSection
-        title={"Today's Deal"}
-        products={products}
-        isLoading={isLoading}
-      />
+      <HomeSectionTitle title="Today's Deal" />
+      <ProductSlider products={products} isLoading={isLoading} delay={4000} />
     </section>
   );
 };
