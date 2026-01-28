@@ -1,50 +1,28 @@
+import { useIsMobile } from "@/hooks/useMobile";
+import { ProductCardSkeleton } from "../card/product";
 import { CardLayout } from "../common/card-layout";
+import { HomeSectionTitleSkeleton } from "../common/section-title";
 import { Skeleton } from "../common/skeleton";
 import { Input } from "../ui/input";
 
-const SectionSkeleton = () => (
-  <div className="mb-10 md:mb-20 container mx-auto">
-    <div className="mb-6">
-      <Skeleton className="h-8 w-40 rounded" />
+const SectionSkeleton = () => {
+  const isMobile = useIsMobile();
+  const initialLength = isMobile ? 2 : 6;
+
+  return (
+    <div className="w-full">
+      <div className="my-6">
+        <HomeSectionTitleSkeleton />
+      </div>
+
+      <CardLayout>
+        {Array.from({ length: initialLength }).map((_, i) => (
+          <ProductCardSkeleton key={i} />
+        ))}
+      </CardLayout>
     </div>
-    <CardLayout>
-      {Array.from({ length: 6 }).map((_, i) => (
-        <div
-          key={i}
-          className="group w-[170px] md:w-[237px] relative overflow-hidden rounded-lg border bg-card transition-all hover:scale-105 cursor-pointer duration-300">
-          <div className="absolute right-2 top-2 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-background/80 backdrop-blur-sm">
-            <Skeleton className="h-4 w-4 rounded-full" />
-          </div>
-          <div className="absolute left-2 top-2 z-10">
-            <Skeleton className="h-5 w-8 rounded-full" />
-          </div>
-          <div className="relative aspect-[16/12] overflow-hidden bg-muted">
-            <Skeleton className="h-full w-full" />
-          </div>
-          <div className="p-3">
-            <div className="mb-2 flex items-center gap-1">
-              <div className="flex items-center gap-1">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Skeleton key={i} className="h-4 w-4" />
-                ))}
-              </div>
-              <Skeleton className="h-3 w-8" />
-            </div>
-            <Skeleton className="h-4 w-full mb-2" />
-            <div className="mb-2 flex items-center gap-2">
-              <Skeleton className="h-6 w-16" />
-              <Skeleton className="h-4 w-12" />
-            </div>
-            <div className="flex gap-2">
-              <Skeleton className="flex-1 h-8" />
-              <Skeleton className="flex-1 h-8" />
-            </div>
-          </div>
-        </div>
-      ))}
-    </CardLayout>
-  </div>
-);
+  );
+};
 
 export const RootPageLoading = () => {
   return (
@@ -61,6 +39,7 @@ export const RootPageLoading = () => {
             />
           </div>
         </div>
+
         <div className="flex items-center gap-4 md:gap-6">
           {Array.from({ length: 3 }).map((_, index) => (
             <Skeleton key={index} className="w-8 h-8 rounded" />
@@ -77,7 +56,7 @@ export const RootPageLoading = () => {
         </div>
       </nav>
 
-      <section className={"container md:mx-auto"}>
+      <section className="container md:mx-auto">
         <div className="w-full mt-2 px-2 md:px-0 mb-4">
           <div className="aspect-[16/5] relative">
             <Skeleton className="w-full h-full absolute" />

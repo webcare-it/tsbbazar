@@ -14,7 +14,7 @@ export const RelatedProducts = () => {
 
   return (
     <section
-      className={`mb-10 md:mb-20 container mx-auto mt-10 ${
+      className={`mb-10 md:mb-20 container mx-auto ${
         (products?.length === 0 && !isLoading && "hidden") || (!id && "hidden")
       }`}>
       <SectionTitle title={"Related Products"} />

@@ -18,22 +18,22 @@ export const ProductTabs = ({ product }: Props) => {
           <TabsTrigger
             value="description"
             className="flex-shrink-0 md:whitespace-nowrap cursor-pointer">
-            {"Details"}
+            Details
           </TabsTrigger>
           <TabsTrigger
             value="policy"
             className="flex-shrink-0 md:whitespace-nowrap cursor-pointer">
-            {"Return Policy"}
+            Return Policy
           </TabsTrigger>
           <TabsTrigger
             value="video"
             className="flex-shrink-0 md:whitespace-nowrap cursor-pointer">
-            {"Video"}
+            Video
           </TabsTrigger>
           <TabsTrigger
             value="reviews"
             className="flex-shrink-0 md:whitespace-nowrap cursor-pointer">
-            {"Reviews"}
+            Reviews
           </TabsTrigger>
         </TabsList>
 
@@ -45,7 +45,7 @@ export const ProductTabs = ({ product }: Props) => {
             />
           ) : (
             <p className="text-muted-foreground">
-              {"No product description available."}
+              No product description available.
             </p>
           )}
         </TabsContent>
@@ -53,7 +53,7 @@ export const ProductTabs = ({ product }: Props) => {
         <TabsContent value="policy" className="mt-4">
           <div>
             <h3 className=" text-base md:text-lg font-semibold text-foreground">
-              {"Product Return Policy"}
+              Product Return Policy
             </h3>
             <ReturnPolicy />
           </div>
@@ -62,10 +62,10 @@ export const ProductTabs = ({ product }: Props) => {
         <TabsContent value="video" className="mt-6">
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-foreground">
-              {"Product Video"}
+              Product Video
             </h3>
-            <div className="aspect-video bg-muted rounded-lg overflow-hidden">
-              {product?.video_link ? (
+            {product?.video_link ? (
+              <div className="aspect-video bg-muted rounded-lg overflow-hidden">
                 <iframe
                   src={getYouTubeEmbedUrl(product.video_link) || ""}
                   title="Product Video"
@@ -74,8 +74,10 @@ export const ProductTabs = ({ product }: Props) => {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
-              ) : (
-                <div className="flex items-center justify-center h-full">
+              </div>
+            ) : (
+              <div className="aspect-[16/4] bg-muted rounded-lg overflow-hidden">
+                <div className="flex items-center justify-center w-full h-full">
                   <div className="text-center">
                     <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                       <svg
@@ -90,8 +92,8 @@ export const ProductTabs = ({ product }: Props) => {
                     </p>
                   </div>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </TabsContent>
 
@@ -122,7 +124,7 @@ const ReturnPolicy = () => {
           dangerouslySetInnerHTML={{ __html: content }}
         />
       ) : (
-        <div>{"No Return Policy found"} </div>
+        <div>No Return Policy found </div>
       )}
     </div>
   );

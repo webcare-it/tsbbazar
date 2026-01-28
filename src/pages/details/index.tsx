@@ -68,23 +68,24 @@ export const ProductDetailsPage = () => {
             onVariantImageChange={setSelectedVariantImage}
           />
         </div>
+        <div className="mb-10 md:mb-16">
+          <ProductTabs product={product} />
 
-        <ProductTabs product={product} />
-
-        {product?.tags && product?.tags?.length > 0 && (
-          <div className="mx-4 md:mx-auto mt-4 md:mt-6">
-            <div className="mt-8 flex items-center gap-2">
-              <span className="text-sm font-medium">{"Tags"}:</span>
-              <div className="flex flex-wrap gap-2">
-                {product?.tags?.map((tag) => (
-                  <Badge key={tag} variant="secondary">
-                    {tag}
-                  </Badge>
-                ))}
+          {product?.tags && product?.tags?.length > 0 && (
+            <div className="mx-4 md:mx-auto mt-4 md:mt-6">
+              <div className="mt-8 flex items-center gap-2">
+                <span className="text-sm font-medium">{"Tags"}:</span>
+                <div className="flex flex-wrap gap-2">
+                  {product?.tags?.map((tag) => (
+                    <Badge key={tag} variant="secondary">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
         <RelatedProducts />
       </BaseLayout>
     </>

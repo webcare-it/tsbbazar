@@ -4,13 +4,13 @@ import { cn } from "@/lib/utils";
 
 interface OptimizedImageProps {
   src: string;
-  alt: string;
+  alt?: string;
   className?: string;
 }
 
 export const OptimizedImage = ({
   src,
-  alt,
+  alt = "image",
   className,
 }: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);

@@ -5,7 +5,6 @@ import { VariantCard } from "@/components/card/variant";
 import { getVariant } from "@/helper";
 import { Review } from "@/components/card/review";
 import { FeatureCards } from "@/pages/details/feature";
-import { Discount } from "@/components/common/discount";
 import { CheckoutButton } from "@/components/common/checkout-button";
 import { useModal } from "@/hooks/useModal";
 import { ModalWrapper } from "@/components/common/modal-wrapper";
@@ -29,6 +28,12 @@ export const ProductInfo = ({ product, onVariantImageChange }: Props) => {
       product?.main_price ||
       "৳0"
   );
+  const [displayDiscountPrice, setDisplayDiscountPrice] = useState<string>(
+    product?.variants?.[0]?.variant_price_without_discount ||
+      product?.stroked_price ||
+      "৳0"
+  );
+
   const { modalRef, modalConfig, onHideModal, onShowModal } = useModal();
   const hasBrand = product?.brand?.name || product?.brand?.logo;
 
@@ -51,11 +56,10 @@ export const ProductInfo = ({ product, onVariantImageChange }: Props) => {
             </span>
             {product?.has_discount && (
               <span className="text-xl md:text-2xl text-muted-foreground line-through">
-                {product?.stroked_price}
+                {displayDiscountPrice}
               </span>
             )}
           </div>
-          <Discount product={product} type="INFO" />
         </div>
 
         {hasBrand && (
@@ -87,6 +91,7 @@ export const ProductInfo = ({ product, onVariantImageChange }: Props) => {
           setQuantity={setQuantity}
           setDisplayPrice={setDisplayPrice}
           onVariantImageChange={onVariantImageChange}
+          setDisplayDiscountPrice={setDisplayDiscountPrice}
         />
 
         <div className="space-y-3">

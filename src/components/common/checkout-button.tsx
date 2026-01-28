@@ -40,9 +40,16 @@ export const CheckoutButton = ({
       onShowModal
     ) {
       onShowModal("DETAILS", product?.name, "max-w-4xl", product?.id);
+
       return;
     } else {
-      fnAddToCart();
+      if (type === "DETAILS") {
+        fnAddToCart(true);
+        return;
+      } else {
+        fnAddToCart();
+        return;
+      }
     }
   };
 
@@ -91,7 +98,7 @@ export const CheckoutButton = ({
       {isLoading ? (
         <>
           <Spinner />
-          <span>{"Processing..."}</span>
+          <span>Processing...</span>
         </>
       ) : (
         <>

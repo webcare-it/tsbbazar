@@ -28,7 +28,7 @@ export const ProductCard = ({ product }: Props) => {
         <Discount product={product} type="CARD" />
 
         <Link to={`/products/${product?.id}/${slugify(product?.name)}`}>
-          <div className="relative aspect-[16/12] overflow-hidden bg-muted">
+          <div className="relative aspect-[16/16] overflow-hidden bg-muted">
             <OptimizedImage
               src={product?.thumbnail_image || ""}
               alt={product?.name}
@@ -156,7 +156,7 @@ export const ProductCardSkeleton = () => {
         <Skeleton className="h-5 w-8 rounded-full" />
       </div>
 
-      <div className="relative aspect-[16/12] overflow-hidden bg-muted">
+      <div className="relative aspect-[16/16] overflow-hidden bg-muted">
         <Skeleton className="h-full w-full" />
       </div>
 

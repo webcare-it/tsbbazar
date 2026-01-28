@@ -68,6 +68,7 @@ export interface VariantType {
   size_name: string;
   variant_price: number;
   variant_price_string: string;
+  variant_price_without_discount: string;
   variant_stock: number;
   variant_image: string;
 }

@@ -19,6 +19,7 @@ interface Props {
   setSelectedSize: React.Dispatch<React.SetStateAction<string | null>>;
   setQuantity: (quantity: number) => void;
   setDisplayPrice: (price: string) => void;
+  setDisplayDiscountPrice: (price: string) => void;
   onVariantImageChange?: (image: string) => void;
 }
 
@@ -32,6 +33,7 @@ export const VariantCard = ({
   setQuantity,
   setDisplayPrice,
   onVariantImageChange,
+  setDisplayDiscountPrice,
 }: Props) => {
   const handleQuantityChange = (newQuantity: number): void => {
     const currentStock = getCurrentStock(product, selectedColor, selectedSize);
@@ -71,12 +73,14 @@ export const VariantCard = ({
       const variant = findVariantByColorAndSize(product, selectedColor, size);
       if (variant) {
         setDisplayPrice(variant?.variant_price_string);
+        setDisplayDiscountPrice(variant?.variant_price_without_discount);
         onVariantImageChange?.(variant?.variant_image);
       }
     } else {
       const sizeVariant = product?.variants?.find((v) => v.size_name === size);
       if (sizeVariant) {
         setDisplayPrice(sizeVariant?.variant_price_string);
+        setDisplayDiscountPrice(sizeVariant?.variant_price_without_discount);
         onVariantImageChange?.(sizeVariant?.variant_image);
       }
     }
@@ -89,6 +93,7 @@ export const VariantCard = ({
       setSelectedSize(firstVariant?.size_name);
       setDisplayPrice(firstVariant?.variant_price_string);
       onVariantImageChange?.(firstVariant?.variant_image);
+      setDisplayDiscountPrice(firstVariant?.variant_price_without_discount);
     }
   }, [
     product,
@@ -96,6 +101,7 @@ export const VariantCard = ({
     setDisplayPrice,
     setSelectedColor,
     setSelectedSize,
+    setDisplayDiscountPrice,
   ]);
 
   useEffect(() => {

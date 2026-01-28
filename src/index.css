@@ -135,7 +135,6 @@ html {
   display: none;
 }
 
-/* NProgress customization
 #nprogress .bar {
   background: var(--primary) !important;
   height: 3px !important;
@@ -149,7 +148,6 @@ html {
   border-top-color: var(--primary) !important;
   border-left-color: var(--primary) !important;
 }
- */
 
 /* Swiper pagination  styles*/
 .mySwiper .swiper-pagination-bullet {

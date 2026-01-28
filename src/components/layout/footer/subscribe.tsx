@@ -26,16 +26,13 @@ export const SubscribeFooter = () => {
   };
 
   return (
-    <div className="py-12 px-4">
-      <div className="container mx-auto max-w-4xl">
+    <div className="pt-16 md:pt-20 px-4">
+      <div className="container mx-auto max-w-4xl bg-primary/10 py-8 rounded-t-lg">
         <div className="text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Newsletter
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 px-4">
+            Join Our Mailing List For Exclusive Offers and Latest Updates
           </h2>
-          <p className="text-lg text-muted-foreground mb-4">
-            Get a free 20% discount on all products on your first order!
-          </p>
-          <div className="max-w-md mx-auto">
+          <div className="max-w-md mx-auto px-4 md:px-0">
             <form
               onSubmit={handleSubmit}
               className="border-2 border-primary rounded-lg overflow-hidden flex">
@@ -45,21 +42,23 @@ export const SubscribeFooter = () => {
                   type="email"
                   name="email"
                   placeholder={"Your Email Address"}
-                  className="w-full h-10 md:h-12 pl-10 pr-0 border-border focus-visible:border-none focus-visible:ring-0 focus-visible:outline-none"
+                  className="w-full h-10 pl-10 pr-0 border-border focus-visible:border-none focus-visible:ring-0 focus-visible:outline-none"
                 />
               </div>
               <Button
                 type="submit"
                 disabled={isPending}
-                className="font-medium transition-colors border-0 rounded-none h-10 md:h-12 px-6">
-                <Send className="w-4 h-4" />
+                className="font-medium transition-colors border-0 rounded-none h-10 px-6">
                 {isPending ? (
                   <>
                     <Spinner />
                     {"Processing..."}
                   </>
                 ) : (
-                  "Subscribe"
+                  <>
+                    <Send className="w-4 h-4 hidden md:block" />
+                    <span>Subscribe</span>
+                  </>
                 )}
               </Button>
             </form>

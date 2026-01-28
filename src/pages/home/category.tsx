@@ -5,7 +5,7 @@ import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import {
-  SectionTitle,
+  HomeSectionTitle,
   SectionTitleSkeleton,
 } from "@/components/common/section-title";
 import { useGetCategoryProductsForHome } from "@/api/queries/useProducts";
@@ -92,66 +92,65 @@ export const CategoryProductsSection = () => {
 
           return (
             <section key={category?.categoryId}>
-              <SectionTitle
+              <HomeSectionTitle
                 title={category?.name}
-                linkText={"View All"}
                 href={`/categories/${category?.categoryId}/${slugify(
                   category?.name
-                )}`}
-              />
-              <div
-                className="w-full mx-1 md:mx-0"
-                id={`slider-wrapper-${uniqueSliderId}`}>
-                <Swiper
-                  key={swiperKey}
-                  modules={[Navigation, Autoplay]}
-                  slidesPerView={2}
-                  spaceBetween={1}
-                  centeredSlides={false}
-                  loop={enableLoop}
-                  loopPreventsSliding={false}
-                  loopAdditionalSlides={
-                    enableLoop ? Math.max(2, maxSlidesPerView) : 0
-                  }
-                  autoplay={
-                    enableLoop
-                      ? {
-                          delay: idx % 2 === 0 ? 3000 : 5000,
-                          disableOnInteraction: false,
+                )}`}>
+                <div
+                  className="w-full mx-1 md:mx-0"
+                  id={`slider-wrapper-${uniqueSliderId}`}>
+                  <Swiper
+                    key={swiperKey}
+                    modules={[Navigation, Autoplay]}
+                    slidesPerView={2}
+                    spaceBetween={1}
+                    centeredSlides={false}
+                    loop={enableLoop}
+                    loopPreventsSliding={false}
+                    loopAdditionalSlides={
+                      enableLoop ? Math.max(2, maxSlidesPerView) : 0
+                    }
+                    autoplay={
+                      enableLoop
+                        ? {
+                            delay: idx % 2 === 0 ? 3000 : 5000,
+                            disableOnInteraction: false,
+                          }
+                        : false
+                    }
+                    speed={1000}
+                    navigation={false}
+                    watchOverflow={!enableLoop}
+                    allowTouchMove={true}
+                    breakpoints={{
+                      640: { slidesPerView: 2, spaceBetween: 8 },
+                      768: { slidesPerView: 3, spaceBetween: 8 },
+                      1024: { slidesPerView: 4, spaceBetween: 16 },
+                      1280: { slidesPerView: 5, spaceBetween: 16 },
+                      1536: { slidesPerView: 6, spaceBetween: 16 },
+                    }}
+                    className={uniqueSliderClass}>
+                    {displayProducts?.map((product, i: number) => {
+                      const productId = product?.id || `dup-${i}`;
+                      const duplicateIndex = (
+                        product as ProductType & {
+                          __duplicateIndex?: number;
                         }
-                      : false
-                  }
-                  speed={1000}
-                  navigation={false}
-                  watchOverflow={!enableLoop}
-                  allowTouchMove={true}
-                  breakpoints={{
-                    640: { slidesPerView: 2, spaceBetween: 8 },
-                    768: { slidesPerView: 3, spaceBetween: 8 },
-                    1024: { slidesPerView: 4, spaceBetween: 16 },
-                    1280: { slidesPerView: 5, spaceBetween: 16 },
-                    1536: { slidesPerView: 6, spaceBetween: 16 },
-                  }}
-                  className={uniqueSliderClass}>
-                  {displayProducts?.map((product, i: number) => {
-                    const productId = product?.id || `dup-${i}`;
-                    const duplicateIndex = (
-                      product as ProductType & {
-                        __duplicateIndex?: number;
-                      }
-                    ).__duplicateIndex;
-                    const uniqueKey =
-                      duplicateIndex !== undefined
-                        ? `${uniqueSliderId}-${productId}-${duplicateIndex}-${i}`
-                        : `${uniqueSliderId}-${productId}-${i}`;
-                    return (
-                      <SwiperSlide key={uniqueKey} className="mx-1">
-                        <ProductCard product={product} />
-                      </SwiperSlide>
-                    );
-                  })}
-                </Swiper>
-              </div>
+                      ).__duplicateIndex;
+                      const uniqueKey =
+                        duplicateIndex !== undefined
+                          ? `${uniqueSliderId}-${productId}-${duplicateIndex}-${i}`
+                          : `${uniqueSliderId}-${productId}-${i}`;
+                      return (
+                        <SwiperSlide key={uniqueKey} className="mx-1">
+                          <ProductCard product={product} />
+                        </SwiperSlide>
+                      );
+                    })}
+                  </Swiper>
+                </div>
+              </HomeSectionTitle>
             </section>
           );
         })
