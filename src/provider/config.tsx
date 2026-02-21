@@ -4,9 +4,9 @@ import { ConfigContext, type ConfigType } from "@/hooks/useConfig";
 import { getConfig } from "@/helper";
 import { updatePrimaryColor, updatePrimaryForeground } from "@/lib/chroma";
 import { MaintenancePage } from "@/pages/utils-pages/maintenance";
-import { ServerError } from "@/pages/utils-pages/server";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { RootPageLoading } from "@/components/layout/root-loading";
+import { ErrorPage } from "@/pages/utils-pages/error";
 
 export const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
   const { data, isLoading, error } = useGetConfig();
@@ -31,7 +31,7 @@ export const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   if (error) {
-    return <ServerError />;
+    return <ErrorPage error={error} />;
   }
 
   if (isLoading) {
