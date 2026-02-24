@@ -73,6 +73,11 @@ export interface VariantType {
   variant_image: string;
 }
 
+export enum StockVisibilityStateEnum {
+  TEXT = "text",
+  QUANTITY = "quantity",
+  HIDE = "hide",
+}
 export interface ProductDetailsType {
   id: number;
   name: string;
@@ -88,6 +93,7 @@ export interface ProductDetailsType {
     path: string;
   }[];
   thumbnail_image: string;
+  stock_visibility_state: StockVisibilityStateEnum;
   tags: string[];
   price_high_low: string;
   choice_options: {

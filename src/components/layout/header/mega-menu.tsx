@@ -89,36 +89,18 @@ export const MegaMenu = () => {
   };
 
   useEffect(() => {
-    const checkScroll = () => {
+    const timer = setTimeout(() => {
       checkScrollPosition();
-    };
-
-    // Check immediately and after a short delay to ensure DOM is ready
-    checkScroll();
-    const timer = setTimeout(checkScroll, 100);
-    const timer2 = setTimeout(checkScroll, 300);
+    }, 100);
 
     const handleResize = () => {
-      setTimeout(checkScroll, 100);
-    };
-
-    const handleScroll = () => {
-      checkScroll();
+      setTimeout(() => checkScrollPosition(), 100);
     };
 
     window.addEventListener("resize", handleResize);
-    const scrollElement = scrollContainerRef.current;
-    if (scrollElement) {
-      scrollElement.addEventListener("scroll", handleScroll);
-    }
-
     return () => {
       clearTimeout(timer);
-      clearTimeout(timer2);
       window.removeEventListener("resize", handleResize);
-      if (scrollElement) {
-        scrollElement.removeEventListener("scroll", handleScroll);
-      }
     };
   }, [menuData]);
 
@@ -139,8 +121,8 @@ export const MegaMenu = () => {
   return (
     menuData?.length > 0 && (
       <nav className="sticky top-14 md:top-16 z-60 bg-background shadow-sm">
-        <div className="container mx-auto relative">
-          <div className="relative">
+        <div className="md:w-[768px] lg:w-[1024px] xl:w-[1280px] 2xl:w-[1536px] mx-auto relative">
+          <div className="flex justify-center">
             <AnimatePresence>
               {canScrollLeft && (
                 <motion.button
@@ -171,19 +153,16 @@ export const MegaMenu = () => {
               )}
             </AnimatePresence>
 
-            <NavigationMenu className={cn("w-full max-w-full")}>
-              <div className="relative overflow-hidden w-full">
+            <NavigationMenu
+              className={cn(
+                "md:w-[768px] lg:w-[1024px] xl:w-[1280px] 2xl:w-[1536px]"
+              )}>
+              <div className="relative w-full overflow-x-hidden">
                 <div
                   ref={scrollContainerRef}
                   onScroll={checkScrollPosition}
-                  className="scrollbar-hide overflow-x-auto pr-12">
-                  <NavigationMenuList
-                    className={cn(
-                      "flex items-center py-0.5 min-w-full",
-                      canScrollLeft || canScrollRight
-                        ? "justify-start"
-                        : "justify-center"
-                    )}>
+                  className="scrollbar-hide overflow-x-hidden pr-12">
+                  <NavigationMenuList className="flex items-center py-0.5 justify-start">
                     {menuData
                       ?.filter((item) => item && item?.name)
                       ?.map((item, index) => {

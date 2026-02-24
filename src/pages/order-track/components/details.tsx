@@ -59,13 +59,13 @@ export const OrderTrackDetails = ({
                     )}
                     <div className="space-y-1">
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <span>{"Quantity"}:</span>
+                        <span>Quantity:</span>
                         <span className="font-semibold text-foreground">
                           {item?.quantity}
                         </span>
                       </div>
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <span>{"Price"}:</span>
+                        <span>Price:</span>
                         <span className="font-semibold text-foreground">
                           {item?.price}
                         </span>
@@ -93,7 +93,7 @@ export const OrderTrackDetails = ({
                   <span className="text-muted-foreground">{"Order Code"}:</span>
                   <div className="flex items-center gap-2">
                     <Link to={`${path}/${orderData?.order_code}`}>
-                      <TooltipWrapper text={"Track Order"}>
+                      <TooltipWrapper text="Track Order">
                         <Button variant="ghost" size="icon" className="size-8">
                           <Eye className="w-4 h-4 text-blue-600" />
                         </Button>
@@ -112,9 +112,7 @@ export const OrderTrackDetails = ({
                   </p>
                 </div>
                 <div className="text-sm flex items-center justify-between gap-2">
-                  <span className="text-muted-foreground">
-                    {"Payment Method"}:
-                  </span>
+                  <span className="text-muted-foreground">Payment Method:</span>
                   <p className="font-semibold text-foreground">
                     {orderData?.payment_method}
                   </p>
@@ -122,24 +120,22 @@ export const OrderTrackDetails = ({
               </div>
 
               <div className="pb-4 border-b">
-                <h3 className="text-sm font-semibold mb-2">
-                  {"Shipping Address"}
-                </h3>
+                <h3 className="text-sm font-semibold mb-2">Shipping Address</h3>
                 <div className="text-sm text-muted-foreground space-y-1">
                   <p className="font-medium text-muted-foreground flex items-start gap-2">
-                    {"Name"}:
+                    Name:
                     <span className="font-medium text-foreground">
                       {orderData?.shipping_address?.name}
                     </span>
                   </p>
                   <p className="font-medium text-muted-foreground flex items-start gap-2">
-                    {"Phone"}:
+                    Phone:
                     <span className="font-medium text-foreground">
                       {orderData?.shipping_address?.phone}
                     </span>
                   </p>
                   <p className="font-medium text-muted-foreground flex items-start gap-2">
-                    {"Address"}:
+                    Address:
                     <span className="font-medium text-foreground">
                       {orderData?.shipping_address?.address}
                     </span>
@@ -149,18 +145,24 @@ export const OrderTrackDetails = ({
 
               <div className="space-y-2">
                 <div className="flex justify-between items-center text-sm">
-                  <span className="text-foreground">{"Shipping Cost"}:</span>
+                  <span className="text-foreground">Subtotal:</span>
                   <span className="font-medium text-foreground">
-                    {orderData?.shipping_cost || "0.00"}
+                    {orderData?.sub_total || "৳00.00"}
+                  </span>
+                </div>
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-foreground">Shipping Cost:</span>
+                  <span className="font-medium text-foreground">
+                    {orderData?.shipping_cost || "৳00.00"}
                   </span>
                 </div>
                 <div className="pt-2 border-t">
                   <div className="flex justify-between">
                     <span className="font-semibold text-lg text-foreground">
-                      {"Total"}:
+                      Total:
                     </span>
                     <span className="font-bold text-lg text-primary">
-                      {orderData?.grand_total || "0.00"}
+                      {orderData?.grand_total || "৳00.00"}
                     </span>
                   </div>
                 </div>

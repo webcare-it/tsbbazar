@@ -47,6 +47,7 @@ export const useCheckoutController = () => {
   const clearFun = () => {
     setSelectedShipping("");
     revalidateQueryFn("get_cart");
+    removeLocalStorage("order_completed");
     revalidateQueryFn("get_cart_summary");
     dispatch(clearCartFn());
     removeLocalStorage("last_order_code");

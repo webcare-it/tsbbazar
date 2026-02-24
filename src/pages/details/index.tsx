@@ -74,12 +74,15 @@ export const ProductDetailsPage = () => {
           {product?.tags && product?.tags?.length > 0 && (
             <div className="mx-4 md:mx-auto mt-4 md:mt-6">
               <div className="mt-8 flex items-center gap-2">
-                <span className="text-sm font-medium">{"Tags"}:</span>
+                <span className="text-sm font-medium">Tags:</span>
                 <div className="flex flex-wrap gap-2">
-                  {product?.tags?.map((tag) => (
-                    <Badge key={tag} variant="secondary">
+                  {product?.tags?.map((tag, i:number) => (
+                    tag?.trim() ? (
+                    <Badge key={i} variant="secondary">
                       {tag}
-                    </Badge>
+                    </Badge>):(
+                      <span key={i} className="text-sm font-medium"> No Tags</span>
+                    )
                   ))}
                 </div>
               </div>

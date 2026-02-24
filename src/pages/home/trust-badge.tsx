@@ -53,7 +53,7 @@ export const TrustBadgeSection = () => {
   ];
 
   return (
-    <div className="container mx-auto hidden md:block">
+    <div className="container mx-auto hidden md:block px-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 md:gap-5">
         {trustItems.map((item, index) => (
           <TrustItem

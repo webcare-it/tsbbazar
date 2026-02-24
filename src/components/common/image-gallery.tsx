@@ -26,7 +26,8 @@ export const ImageGallery = ({ img, product, className }: Props) => {
   const { modalRef, modalConfig, onHideModal, onShowModal } = useModal();
 
   const images = useMemo(() => {
-    return product?.photos?.map((photo) => getImageUrl(photo?.path)) || [];
+    const imageUrls = product?.photos?.map((photo) => getImageUrl(photo?.path)) || [];
+    return [...new Set(imageUrls)];
   }, [product?.photos]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -161,7 +162,7 @@ export const ImageGallery = ({ img, product, className }: Props) => {
           )}
 
           <div
-            className="flex-1 relative w-full aspect-square border border-primary/10 select-none bg-primary/5 rounded-2xl overflow-hidden group cursor-zoom-in"
+            className="flex-1 relative w-full aspect-[16/17] border border-primary/10 select-none bg-primary/5 rounded-2xl overflow-hidden group cursor-zoom-in"
             onMouseMove={handleMouseMove}
             onMouseEnter={() => setIsZoomed(true)}
             onMouseLeave={() => setIsZoomed(false)}>
@@ -191,7 +192,7 @@ export const ImageGallery = ({ img, product, className }: Props) => {
             <motion.div
               initial={{ opacity: 0 }}
               whileHover={{ opacity: 1 }}
-              className="absolute top-4 right-4 bg-black/50 text-white p-2 rounded-lg flex items-center gap-2">
+              className="absolute top-2 right-2 bg-black/50 text-white p-2 rounded-lg flex items-center gap-2">
               <ZoomIn size={18} />
             </motion.div>
 
@@ -201,15 +202,15 @@ export const ImageGallery = ({ img, product, className }: Props) => {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={prevImage}
-                  className="absolute left-1 md:left-4 top-1/2 -translate-y-1/2 hover:border-primary/10 border border-primary/40 text-primary p-1.5 md:p-2 rounded-full opacity-0 group-hover:opacity-100 bg-white/90 select-none">
-                  <ChevronLeft size={24} />
+                  className="absolute left-1 md:left-2 top-1/2 -translate-y-1/2 hover:border-primary/10 border border-primary/40 text-primary p-1.5 md:p-2 rounded-full opacity-0 group-hover:opacity-100 bg-white/90 select-none">
+                  <ChevronLeft size={20} />
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={nextImage}
-                  className="absolute right-1 md:right-4 top-1/2 -translate-y-1/2 hover:border-primary/10 border border-primary/40 text-primary p-1.5 md:p-2 rounded-full opacity-0 group-hover:opacity-100 bg-white/90 select-none">
-                  <ChevronRight size={24} />
+                  className="absolute right-1 md:right-2 top-1/2 -translate-y-1/2 hover:border-primary/10 border border-primary/40 text-primary p-1.5 md:p-2 rounded-full opacity-0 group-hover:opacity-100 bg-white/90 select-none">
+                  <ChevronRight size={20} />
                 </motion.button>
               </>
             )}

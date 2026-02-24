@@ -97,7 +97,7 @@ export const CartButton = ({
         ) : (
           <>
             <ShoppingCart className="h-4 w-4 hidden md:block" />
-            <span className="text-[10px]">{"Add to Cart"}</span>
+            <span className="text-[10px]">Add to cart</span>
           </>
         )}
       </Button>
@@ -129,7 +129,7 @@ export const CartButton = ({
       ) : (
         <>
           {style[type].icon}
-          {"Add to Cart"}
+          {"Add to cart"}
         </>
       )}
     </Button>

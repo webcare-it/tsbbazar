@@ -1,13 +1,5 @@
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
-import { cn } from "@/lib/utils";
+import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
+import { cn } from '@/lib/utils';
 
 export interface PaginationDataType {
   current_page: number;
@@ -30,11 +22,7 @@ interface PaginationWrapperProps {
   className?: string;
 }
 
-export const PaginationWrapper = ({
-  paginationData,
-  onPageChange,
-  className = "mb-10 mt-10 md:mb-20 container mx-auto",
-}: PaginationWrapperProps) => {
+export const PaginationWrapper = ({ paginationData, onPageChange, className = 'mb-10 mt-10 md:mb-20 container mx-auto' }: PaginationWrapperProps) => {
   const { current_page, last_page } = paginationData;
 
   const handlePageClick = (page: number) => {
@@ -67,7 +55,7 @@ export const PaginationWrapper = ({
         if (last_page > 4) {
           paginationItems.push({
             page: null,
-            label: "...",
+            label: '...',
             active: false,
           });
         }
@@ -88,14 +76,14 @@ export const PaginationWrapper = ({
       } else if (current_page >= last_page - 2) {
         paginationItems.push({
           page: 1,
-          label: "1".toString(),
+          label: '1'.toString(),
           active: current_page === 1,
         });
 
         if (last_page > 4) {
           paginationItems.push({
             page: null,
-            label: "...",
+            label: '...',
             active: false,
           });
         }
@@ -110,13 +98,13 @@ export const PaginationWrapper = ({
       } else {
         paginationItems.push({
           page: 1,
-          label: "1",
+          label: '1',
           active: current_page === 1,
         });
 
         paginationItems.push({
           page: null,
-          label: "...",
+          label: '...',
           active: false,
         });
 
@@ -130,7 +118,7 @@ export const PaginationWrapper = ({
 
         paginationItems.push({
           page: null,
-          label: "...",
+          label: '...',
           active: false,
         });
 
@@ -146,7 +134,7 @@ export const PaginationWrapper = ({
       if (last_page > 0) {
         paginationItems.push({
           page: 1,
-          label: "1",
+          label: '1',
           active: current_page === 1,
         });
       }
@@ -154,16 +142,12 @@ export const PaginationWrapper = ({
       if (current_page > 4) {
         paginationItems.push({
           page: null,
-          label: "...",
+          label: '...',
           active: false,
         });
       }
 
-      for (
-        let i = Math.max(2, current_page - delta);
-        i <= Math.min(last_page - 1, current_page + delta);
-        i++
-      ) {
+      for (let i = Math.max(2, current_page - delta); i <= Math.min(last_page - 1, current_page + delta); i++) {
         if (i !== 1 && i !== last_page && i !== 2) {
           paginationItems.push({
             page: i,
@@ -176,7 +160,7 @@ export const PaginationWrapper = ({
       if (current_page < last_page - 3) {
         paginationItems.push({
           page: null,
-          label: "...",
+          label: '...',
           active: false,
         });
       }
@@ -198,7 +182,7 @@ export const PaginationWrapper = ({
   return (
     <section className={className}>
       <Pagination>
-        <PaginationContent className={cn("flex items-center flex-wrap px-4")}>
+        <PaginationContent className={cn('flex items-center flex-wrap px-4')}>
           <PaginationItem>
             <PaginationPrevious
               onClick={(e) => {
@@ -207,11 +191,7 @@ export const PaginationWrapper = ({
                   handlePageClick(current_page - 1);
                 }
               }}
-              className={
-                current_page <= 1
-                  ? "pointer-events-none opacity-50"
-                  : "cursor-pointer"
-              }
+              className={current_page <= 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
             />
           </PaginationItem>
 
@@ -247,11 +227,7 @@ export const PaginationWrapper = ({
                   handlePageClick(current_page + 1);
                 }
               }}
-              className={
-                current_page >= last_page
-                  ? "pointer-events-none opacity-50"
-                  : "cursor-pointer"
-              }
+              className={current_page >= last_page ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
             />
           </PaginationItem>
         </PaginationContent>

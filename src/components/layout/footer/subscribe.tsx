@@ -29,7 +29,7 @@ export const SubscribeFooter = () => {
     <div className="pt-16 md:pt-20 px-4">
       <div className="container mx-auto max-w-4xl bg-primary/10 py-8 rounded-t-lg">
         <div className="text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 px-4">
+          <h2 className="text-xl md:text-4xl font-bold text-foreground mb-4 px-4">
             Join Our Mailing List For Exclusive Offers and Latest Updates
           </h2>
           <div className="max-w-md mx-auto px-4 md:px-0">

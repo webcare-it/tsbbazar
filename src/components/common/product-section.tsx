@@ -5,7 +5,7 @@ import {
 import type { ProductType } from "@/type";
 import { CardLayout } from "@/components/common/card-layout";
 import { ProductCard, ProductCardSkeleton } from "@/components/card/product";
-import { useIsMobile } from "@/hooks/useMobile";
+import { useInitialLength, useIsMobile } from "@/hooks/useMobile";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, ArrowUp } from "lucide-react";
 import { useState } from "react";
@@ -18,9 +18,9 @@ interface Props {
 
 export const ProductSection = ({ isLoading, products, title }: Props) => {
   const isMobile = useIsMobile();
-  const [showAll, setShowAll] = useState(false);
+  const initialLength = useInitialLength();
 
-  const initialLength = isMobile ? 2 : 6;
+  const [showAll, setShowAll] = useState(false);
 
   const handleViewAll = () => {
     setShowAll(true);
@@ -44,7 +44,7 @@ export const ProductSection = ({ isLoading, products, title }: Props) => {
         </div>
 
         <CardLayout>
-          {Array.from({ length: 6 }).map((_, i) => (
+          {Array.from({ length: initialLength }).map((_, i) => (
             <ProductCardSkeleton key={i} />
           ))}
         </CardLayout>
@@ -60,12 +60,12 @@ export const ProductSection = ({ isLoading, products, title }: Props) => {
       </CardLayout>
       <div className="flex justify-center items-center mt-4">
         {!showAll && products && products?.length > initialLength ? (
-          <Button onClick={handleViewAll}>
+          <Button onClick={handleViewAll} size={isMobile ? "sm" : "default"}>
             View All
             <ArrowDown className="w-6 h-6 font-bold group-hover:translate-x-1 transition-transform" />
           </Button>
         ) : showAll && products && products?.length > initialLength ? (
-          <Button onClick={handleSeeLess}>
+          <Button onClick={handleSeeLess} size={isMobile ? "sm" : "default"}>
             See Less
             <ArrowUp className="w-6 h-6 font-bold group-hover:-translate-x-1 transition-transform" />
           </Button>

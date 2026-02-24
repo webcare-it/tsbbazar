@@ -1,10 +1,9 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { getYouTubeEmbedUrl } from "@/helper";
-
-import type { ProductDetailsType } from "@/type";
-import { ProductReviews } from "./review";
-import { useGetPolicy } from "@/api/queries/usePolicy";
-import { Skeleton } from "@/components/common/skeleton";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { getYouTubeEmbedUrl } from '@/helper';
+import type { ProductDetailsType } from '@/type';
+import { ProductReviews } from './review';
+import { useGetPolicy } from '@/api/queries/usePolicy';
+import { Skeleton } from '@/components/common/skeleton';
 
 interface Props {
   product: ProductDetailsType;
@@ -15,59 +14,42 @@ export const ProductTabs = ({ product }: Props) => {
     <div className="mt-6 md:mt-8 mx-4 md:mx-auto">
       <Tabs defaultValue="description" className="w-full">
         <TabsList className="flex w-full overflow-x-auto">
-          <TabsTrigger
-            value="description"
-            className="flex-shrink-0 md:whitespace-nowrap cursor-pointer">
+          <TabsTrigger value="description" className="flex-shrink-0 md:whitespace-nowrap cursor-pointer">
             Details
           </TabsTrigger>
-          <TabsTrigger
-            value="policy"
-            className="flex-shrink-0 md:whitespace-nowrap cursor-pointer">
+          <TabsTrigger value="policy" className="flex-shrink-0 md:whitespace-nowrap cursor-pointer">
             Return Policy
           </TabsTrigger>
-          <TabsTrigger
-            value="video"
-            className="flex-shrink-0 md:whitespace-nowrap cursor-pointer">
+          <TabsTrigger value="video" className="flex-shrink-0 md:whitespace-nowrap cursor-pointer">
             Video
           </TabsTrigger>
-          <TabsTrigger
-            value="reviews"
-            className="flex-shrink-0 md:whitespace-nowrap cursor-pointer">
+          <TabsTrigger value="reviews" className="flex-shrink-0 md:whitespace-nowrap cursor-pointer">
             Reviews
           </TabsTrigger>
         </TabsList>
 
         <TabsContent value="description" className="mt-6">
           {product?.description ? (
-            <div
-              className="w-full overflow-hidden"
-              dangerouslySetInnerHTML={{ __html: product?.description }}
-            />
+            <div className="w-full overflow-hidden" dangerouslySetInnerHTML={{ __html: product?.description }} />
           ) : (
-            <p className="text-muted-foreground">
-              No product description available.
-            </p>
+            <p className="text-muted-foreground">No product description available.</p>
           )}
         </TabsContent>
 
         <TabsContent value="policy" className="mt-4">
           <div>
-            <h3 className=" text-base md:text-lg font-semibold text-foreground">
-              Product Return Policy
-            </h3>
+            <h3 className=" text-base md:text-lg font-semibold text-foreground">Product Return Policy</h3>
             <ReturnPolicy />
           </div>
         </TabsContent>
 
         <TabsContent value="video" className="mt-6">
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-foreground">
-              Product Video
-            </h3>
+            <h3 className="text-lg font-semibold text-foreground">Product Video</h3>
             {product?.video_link ? (
               <div className="aspect-video bg-muted rounded-lg overflow-hidden">
                 <iframe
-                  src={getYouTubeEmbedUrl(product.video_link) || ""}
+                  src={getYouTubeEmbedUrl(product.video_link) || ''}
                   title="Product Video"
                   className="w-full h-full"
                   frameBorder="0"
@@ -76,20 +58,15 @@ export const ProductTabs = ({ product }: Props) => {
                 />
               </div>
             ) : (
-              <div className="aspect-[16/4] bg-muted rounded-lg overflow-hidden">
+              <div className="aspect-video md:aspect-[16/4] bg-muted rounded-lg overflow-hidden">
                 <div className="flex items-center justify-center w-full h-full">
                   <div className="text-center">
                     <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <svg
-                        className="w-8 h-8 text-primary"
-                        fill="currentColor"
-                        viewBox="0 0 24 24">
+                      <svg className="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M8 5v14l11-7z" />
                       </svg>
                     </div>
-                    <p className="text-muted-foreground">
-                      {"Product video will be available soon"}
-                    </p>
+                    <p className="text-muted-foreground">{'Product video will be available soon'}</p>
                   </div>
                 </div>
               </div>
@@ -119,10 +96,7 @@ const ReturnPolicy = () => {
           ))}
         </div>
       ) : content ? (
-        <div
-          className="prose prose-sm max-w-none"
-          dangerouslySetInnerHTML={{ __html: content }}
-        />
+        <div className="prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: content }} />
       ) : (
         <div>No Return Policy found </div>
       )}

@@ -32,6 +32,7 @@ export const LandingPage = () => {
   useEffect(() => {
     removeLocalStorage("token");
     removeLocalStorage("user_id");
+    removeLocalStorage("order_completed");
     removeLocalStorage("guest_user_id");
     removeLocalStorage("selected_shipping_method");
     removeLocalStorage("selected_payment_method");

@@ -10,7 +10,7 @@ interface OptimizedImageProps {
 
 export const OptimizedImage = ({
   src,
-  alt = "image",
+  alt = "Image",
   className,
 }: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);

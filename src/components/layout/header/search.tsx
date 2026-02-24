@@ -179,7 +179,7 @@ const ActionSearchBarComponent = forwardRef<HTMLInputElement | null>(
             onFocus={handleFocus}
             onBlur={() => setTimeout(() => setIsFocused(false), 200)}
             onKeyDown={handleKeyDown}
-            className="pl-3 pr-9 py-1.5 h-10 md:h-11 text-base rounded-md focus-visible:ring-offset-0 w-full bg-background"
+            className="pl-3 pr-9 py-1.5 h-10 text-base rounded-md focus-visible:ring-offset-0 w-full bg-background"
           />
 
           <div

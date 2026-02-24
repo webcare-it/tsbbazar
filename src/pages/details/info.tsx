@@ -26,12 +26,12 @@ export const ProductInfo = ({ product, onVariantImageChange }: Props) => {
     product?.variants?.[0]?.variant_price_string ||
       `${product?.currency_symbol}${product?.calculable_price}` ||
       product?.main_price ||
-      "৳0"
+      "৳00.00"
   );
   const [displayDiscountPrice, setDisplayDiscountPrice] = useState<string>(
     product?.variants?.[0]?.variant_price_without_discount ||
       product?.stroked_price ||
-      "৳0"
+      "৳00.00"
   );
 
   const { modalRef, modalConfig, onHideModal, onShowModal } = useModal();

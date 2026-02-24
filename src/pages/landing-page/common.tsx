@@ -89,7 +89,7 @@ export const ProductShowcaseSection = ({ info }: Props) => {
           480: { slidesPerView: 1 },
           600: { slidesPerView: 2 },
           1024: { slidesPerView: 3 },
-          1280: { slidesPerView: 3 },
+          1280: { slidesPerView: 4 },
         }}
         className="mySwiper">
         {Array.from({ length: 5 }, (_, index) => {
@@ -97,7 +97,7 @@ export const ProductShowcaseSection = ({ info }: Props) => {
           return (
             <SwiperSlide key={index}>
               <div className="px-2">
-                <div className="rounded-lg bg-blue-50 border border-blue-100 shadow-md overflow-hidden relative h-[270px] w-[300px] md:h-[350px] md:w-[400px] lg:h-[400px] lg:w-[500px]">
+                <div className="rounded-lg bg-blue-50 border border-blue-100 shadow-md overflow-hidden relative aspect-[16/20]">
                   <OptimizedImage
                     src={images?.[imageIndex] || ""}
                     alt={`Product ${index + 1}`}
@@ -128,7 +128,17 @@ export const BenefitsSection = ({ info }: Props) => {
     );
   };
 
-  const hasFeatures = [
+  const hasTextContent = (html: string | undefined): boolean => {
+    if (!html) return false;
+
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = html;
+    const textContent = tempDiv.textContent || tempDiv.innerText || "";
+
+    return textContent.trim().length > 0;
+  };
+
+  const features = [
     info?.feature_1,
     info?.feature_2,
     info?.feature_3,
@@ -137,9 +147,9 @@ export const BenefitsSection = ({ info }: Props) => {
     info?.feature_6,
     info?.feature_7,
     info?.feature_8,
-  ]?.some((feature) => feature);
+  ].filter((feature) => hasTextContent(feature));
 
-  if (!hasFeatures) {
+  if (features?.length === 0) {
     return null;
   }
 
@@ -147,14 +157,10 @@ export const BenefitsSection = ({ info }: Props) => {
     <div>
       <Title>{info?.short_description} </Title>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-4 items-baseline md:gap-6">
-        {info?.feature_1 && renderHtml(info?.feature_1)}
-        {info?.feature_2 && renderHtml(info?.feature_2)}
-        {info?.feature_3 && renderHtml(info?.feature_3)}
-        {info?.feature_4 && renderHtml(info?.feature_4)}
-        {info?.feature_5 && renderHtml(info?.feature_5)}
-        {info?.feature_6 && renderHtml(info?.feature_6)}
-        {info?.feature_7 && renderHtml(info?.feature_7)}
-        {info?.feature_8 && renderHtml(info?.feature_8)}
+        {features &&
+          features?.map((feature, index) => (
+            <div key={index}>{renderHtml(feature)}</div>
+          ))}
       </div>
     </div>
   );

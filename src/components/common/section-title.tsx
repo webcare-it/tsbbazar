@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Skeleton } from "./skeleton";
 import { Button } from "../ui/button";
+import { useIsMobile } from "@/hooks/useMobile";
 
 interface Props {
   title: string;
@@ -48,6 +49,7 @@ export const HomeSectionTitle = ({
   href,
   children,
 }: NewProps) => {
+  const isMobile = useIsMobile();
   return (
     <>
       <div
@@ -60,7 +62,7 @@ export const HomeSectionTitle = ({
       {href && (
         <div className="flex justify-center items-center mt-4">
           <Link to={href}>
-            <Button>
+            <Button size={isMobile ? "sm" : "default"}>
               View All
               <ArrowRight className="w-6 h-4 group-hover:translate-x-1 transition-transform" />
             </Button>

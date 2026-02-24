@@ -22,6 +22,7 @@ type StateType = string | null;
 export const ProductSection = ({ info }: Props) => {
   const hasMounted = useRef(false);
 
+  const campaign = useSelector((state: RootStateType) => state.campaign?.items);
   const { startCheckoutTracker } = useGtmTracker();
   const products = useMemo(
     () => info?.products?.data || [],
@@ -34,7 +35,12 @@ export const ProductSection = ({ info }: Props) => {
   });
 
   useEffect(() => {
-    if (isIntersecting && products?.length > 0 && !hasMounted.current) {
+    if (
+      isIntersecting &&
+      products?.length > 0 &&
+      !hasMounted.current &&
+      campaign?.length > 0
+    ) {
       hasMounted.current = true;
 
       const trackerData: PurchaseTrackerType = {
@@ -61,7 +67,7 @@ export const ProductSection = ({ info }: Props) => {
 
       startCheckoutTracker(trackerData);
     }
-  }, [isIntersecting, products, startCheckoutTracker]);
+  }, [isIntersecting, products, startCheckoutTracker, campaign]);
 
   return (
     <section id="order-section" ref={ref}>

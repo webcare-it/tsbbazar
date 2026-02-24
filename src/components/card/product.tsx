@@ -37,14 +37,14 @@ export const ProductCard = ({ product }: Props) => {
           </div>
         </Link>
 
-        <div className="p-1.5 sm:p-3">
+        <div className="p-1.5 sm:p-2 xl:p-3">
           <Link to={`/products/${product?.id}/${slugify(product?.name)}`}>
             <Review product={product} starSize="w-3 h-3" />
             <h3 className="line-clamp-1 mt-0.5 text-xs md:text-sm font-medium leading-tight text-foreground duration-300">
               {product?.name}
             </h3>
 
-            <div className="mb-2 flex items-center gap-2 duration-300">
+            <div className="mb-1 flex items-center gap-2 duration-300">
               <span className="text-base md:text-lg font-bold text-foreground">
                 {product?.main_price}
               </span>
@@ -172,7 +172,7 @@ export const ProductCardSkeleton = () => {
 
         <Skeleton className="h-4 w-full mb-2" />
 
-        <div className="mb-2 flex items-center gap-2">
+        <div className="mb-1 flex items-center gap-2">
           <Skeleton className="h-6 w-16" />
           <Skeleton className="h-4 w-12" />
         </div>

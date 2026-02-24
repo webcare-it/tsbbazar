@@ -11,7 +11,7 @@ export const Discount = ({ product, type }: Props) => {
   const discount = hasDiscount(product?.main_price, product?.stroked_price);
   const isDiscount = discount > 0;
 
-  if (type === "INFO") {
+  if (type === "INFO" && product?.has_discount) {
     return (
       <>
         {isDiscount && (
@@ -25,7 +25,7 @@ export const Discount = ({ product, type }: Props) => {
 
   return (
     <>
-      {isDiscount && (
+      {isDiscount && product?.has_discount && (
         <Badge
           className={`${
             type === "DETAILS" && "text-sm font-semibold"

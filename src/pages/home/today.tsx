@@ -9,7 +9,7 @@ export const TodaysDealSection = ({ isLoading, products }: HomePropsType) => {
       className={`container mx-auto ${
         products?.length === 0 && !isLoading && "hidden"
       }`}>
-      <HomeSectionTitle title="Today's Deal" />
+      <HomeSectionTitle title="New Arrivals" />
       <ProductSlider products={products} isLoading={isLoading} delay={4000} />
     </section>
   );

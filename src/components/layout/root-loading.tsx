@@ -1,4 +1,4 @@
-import { useIsMobile } from "@/hooks/useMobile";
+import { useInitialLength } from "@/hooks/useMobile";
 import { ProductCardSkeleton } from "../card/product";
 import { CardLayout } from "../common/card-layout";
 import { HomeSectionTitleSkeleton } from "../common/section-title";
@@ -6,11 +6,10 @@ import { Skeleton } from "../common/skeleton";
 import { Input } from "../ui/input";
 
 const SectionSkeleton = () => {
-  const isMobile = useIsMobile();
-  const initialLength = isMobile ? 2 : 6;
+  const initialLength = useInitialLength();
 
   return (
-    <div className="w-full">
+    <div className="mb-16 md:mb-20">
       <div className="my-6">
         <HomeSectionTitleSkeleton />
       </div>
@@ -23,6 +22,18 @@ const SectionSkeleton = () => {
     </div>
   );
 };
+
+const SectionPromotion  = () => {
+  return (
+    
+    <div className="w-full mb-16 px-2 md:px-0">
+    <div className="mb-6">
+      <HomeSectionTitleSkeleton  />
+    </div>
+    <Skeleton className="w-full aspect-[16/5]" />
+  </div>
+  )
+}
 
 export const RootPageLoading = () => {
   return (
@@ -55,14 +66,12 @@ export const RootPageLoading = () => {
           </div>
         </div>
       </nav>
-
       <section className="container md:mx-auto">
         <div className="w-full mt-2 px-2 md:px-0 mb-4">
           <div className="aspect-[16/5] relative">
             <Skeleton className="w-full h-full absolute" />
           </div>
         </div>
-
         <div className="w-full py-10 md:py-16">
           <div className="hidden md:flex gap-2 overflow-hidden">
             {Array.from({ length: 10 }).map((_, index) => (
@@ -85,7 +94,6 @@ export const RootPageLoading = () => {
             ))}
           </div>
         </div>
-
         <div className="container mx-auto hidden md:block mb-20">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 md:gap-5">
             {Array.from({ length: 5 }).map((_, index) => (
@@ -103,33 +111,14 @@ export const RootPageLoading = () => {
             ))}
           </div>
         </div>
-
         <SectionSkeleton />
-
-        <div className="w-full mb-16 px-2 md:px-0">
-          <Skeleton className="w-full aspect-[16/5]" />
-        </div>
-
+        <SectionPromotion/>
         <SectionSkeleton />
-
-        <div className="w-full mb-16 px-2 md:px-0">
-          <div className="mb-6">
-            <Skeleton className="h-8 w-40 rounded" />
-          </div>
-          <Skeleton className="w-full aspect-[16/5]" />
-        </div>
-
+        <SectionPromotion/>
+        <SectionSkeleton />    
+        <SectionPromotion/>
         <SectionSkeleton />
-
-        <div className="w-full mb-16 px-2 md:px-0">
-          <Skeleton className="w-full aspect-[16/5]" />
-        </div>
-
-        <SectionSkeleton />
-
-        <div className="w-full mb-16 px-2 md:px-0">
-          <Skeleton className="w-full aspect-[16/5]" />
-        </div>
+        <SectionPromotion/>
       </section>
     </main>
   );
