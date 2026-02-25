@@ -16,8 +16,7 @@ export const WishlistPublicPage = () => {
 
       <BaseLayout>
         <section className="mb-10 md:mb-20 mt-10">
-          <HomeSectionTitle title={"My Wishlist"} />
-
+          <HomeSectionTitle title="My Wishlist" />
           <WishlistItems />
         </section>
       </BaseLayout>

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useGetRelatedProducts } from "@/api/queries/useProducts";
 import { ProductCard, ProductCardSkeleton } from "@/components/card/product";
 import { CardLayout } from "@/components/common/card-layout";
-import { SectionTitle } from "@/components/common/section-title";
+import { HomeSectionTitle } from "@/components/common/section-title";
 import { AnimationWrapper } from "@/components/common/animation-wrapper";
 
 export const RelatedProducts = () => {
@@ -17,10 +17,10 @@ export const RelatedProducts = () => {
       className={`mb-10 md:mb-20 container mx-auto ${
         (products?.length === 0 && !isLoading && "hidden") || (!id && "hidden")
       }`}>
-      <SectionTitle title={"Related Products"} />
+      <HomeSectionTitle title="Related Products" />
       <CardLayout>
         {isLoading
-          ? Array.from({ length: 5 }).map((_, i) => (
+          ? Array.from({ length: 6 }).map((_, i) => (
               <ProductCardSkeleton key={i} />
             ))
           : products?.length > 0 &&

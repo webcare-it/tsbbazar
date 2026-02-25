@@ -1,4 +1,4 @@
-import { SectionTitle } from "@/components/common/section-title";
+import { HomeSectionTitle } from "@/components/common/section-title";
 import { AnimationWrapper } from "@/components/common/animation-wrapper";
 import { NoDataFound } from "@/components/common/no-data-found";
 import { BaseLayout } from "@/components/layout/base-layout";
@@ -18,7 +18,7 @@ export const CategoriesPage = () => {
 
       <BaseLayout>
         <section className="mb-10 md:mb-20 container mx-auto mt-6 md:mt-10">
-          <SectionTitle title="All Categories" />
+          <HomeSectionTitle title="All Categories" />
 
           <div className="block md:hidden mt-6 mx-4">
             <MobileCategory categories={categories} isLoading={isLoading} />

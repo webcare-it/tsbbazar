@@ -78,8 +78,12 @@ export const HeaderMobile = () => {
                 <div className="flex justify-end items-center gap-2.5">
                   <button
                     onClick={handleSearchClick}
-                    className="p-1 hover:bg-accent rounded-md transition-colors">
-                    <Search className="h-5 w-5 text-gray-900" />
+                    className="p-2 hover:bg-accent rounded-md transition-colors">
+                    <Search
+                      size={36}
+                      strokeWidth={2.5}
+                      className="h-5 w-5 text-gray-900 hover:text-primary"
+                    />
                   </button>
                   <Link
                     to="/track-order"
@@ -112,12 +116,16 @@ export const HeaderMobile = () => {
             <div className="flex justify-end items-center gap-2.5">
               <button
                 onClick={handleSearchClick}
-                className="p-1 hover:bg-accent rounded-md transition-colors">
-                <Search className="h-5 w-5 text-gray-900" />
+                className="p-1 hover:bg-accent rounded-md transition-colors hover:text-primary">
+                <Search
+                  size={36}
+                  strokeWidth={2.5}
+                  className="h-5 w-5 text-gray-900 hover:text-primary"
+                />
               </button>
               <Link
                 to="/track-order"
-                className="p-1 hover:bg-accent rounded-md transition-colors">
+                className="p-1 hover:bg-accent rounded-md transition-colors hover:text-primary">
                 <TrackIcon height="20px" width="30px" />
               </Link>
             </div>
@@ -141,6 +149,8 @@ export const FooterMobile = () => {
 
   const cart = useSelector((state: RootStateType) => state.cart.items);
   const wishlist = useSelector((state: RootStateType) => state.wishlist.items);
+  const itemCount = cart?.length ?? 0;
+  const hasItems = itemCount > 0;
 
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 w-full">
@@ -173,19 +183,37 @@ export const FooterMobile = () => {
           <Link
             to="/cart"
             className="flex flex-col items-center justify-center min-w-0 flex-1 relative">
-            <div className="bg-primary border-2 border-white rounded-full p-2 -mt-8 mb-1">
+            <motion.div
+              animate={
+                hasItems
+                  ? {
+                      scale: [1, 1.12, 1],
+                    }
+                  : { scale: 1 }
+              }
+              transition={
+                hasItems
+                  ? {
+                      duration: 1.2,
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                      ease: "easeInOut",
+                    }
+                  : {}
+              }
+              className="bg-primary border-2 border-white rounded-full p-2 -mt-8 mb-1">
               <Handbag className="h-8 w-8 text-white" />
-            </div>
+            </motion.div>
+
             <span
               className={`text-[10px] text-foreground font-medium ${
                 isPathActive(location.pathname, "/cart")
                   ? "text-primary"
                   : "text-foreground"
               }`}>
-              {"Cart"} ({cart?.length})
+              Cart ({itemCount})
             </span>
           </Link>
-
           <Link
             to={"/wishlist"}
             className="relative flex flex-col items-center justify-center min-w-0 flex-1">

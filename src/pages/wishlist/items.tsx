@@ -17,15 +17,15 @@ export const WishlistItems = () => {
     <>
       {wishlist?.items?.length === 0 ? (
         <div className="text-center py-16">
-          <Heart className="mx-auto h-16 w-16 text-muted-foreground mb-4" />
+          <Heart className="mx-auto h-16 w-16 text-primary mb-4" />
           <h2 className="text-2xl font-bold text-foreground mb-2">
-            {"Your wishlist is empty"}
+            Your wishlist is empty
           </h2>
           <p className="text-muted-foreground mb-6">
-            {"Save items you love for later by adding them to your wishlist."}
+            Save items you love for later by adding them to your wishlist.
           </p>
           <Button asChild>
-            <Link to="/products">{"Start Shopping"}</Link>
+            <Link to="/products">Start Shopping→</Link>
           </Button>
         </div>
       ) : (

@@ -52,7 +52,10 @@ export const UserProfile = ({ variant = "desktop" }: Props) => {
               </AvatarFallback>
             </Avatar>
           ) : (
-            <UserRound className="h-6 w-6 group-hover:text-primary" />
+            <UserRound
+              className="h-6 w-6 group-hover:text-primary"
+              strokeWidth={2.5}
+            />
           )}
         </Link>
       </Button>
@@ -96,7 +99,10 @@ export const UserProfile = ({ variant = "desktop" }: Props) => {
         to={linkTo}
         className="flex flex-col items-center justify-center min-w-0 flex-1">
         <UserRound className={cn("h-5 w-5 mb-1 text-foreground")} />
-        <span className={cn("text-[10px] font-medium text-foreground hover:text-primary")}>
+        <span
+          className={cn(
+            "text-[10px] font-medium text-foreground hover:text-primary"
+          )}>
           Account
         </span>
       </Link>

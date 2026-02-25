@@ -47,10 +47,10 @@ const CategoryItem = ({ category, level }: CategoryItemProps) => {
 
   return (
     <div className="border-b border-border/50 last:border-b-0">
-      <div className="flex items-center space-x-1 p-2 bg-background">
+      <div className="flex items-center space-x-1 p-2 bg-background group">
         <Link
           to={`/categories/${category?.id}/${slugify(category?.name)}`}
-          className="flex-1 flex items-center gap-1">
+          className="flex-1 flex items-center gap-1 group-hover:bg-primary/5 rounded-r">
           <div className="w-12 h-12 rounded overflow-hidden flex-shrink-0 bg-muted">
             <OptimizedImage
               src={getImageUrl(category.icon)}
@@ -65,7 +65,7 @@ const CategoryItem = ({ category, level }: CategoryItemProps) => {
             </h3>
             {category?.number_of_children > 0 && (
               <p className="text-xs text-muted-foreground">
-                {category?.number_of_children} {"subcategories"}
+                {category?.number_of_children} subcategories
               </p>
             )}
           </div>
@@ -125,12 +125,12 @@ const SubCategoryItem = ({
 
   return (
     <div className="border-b border-border/30 last:border-b-0">
-      <div className="flex items-center p-2 pl-4 gap-1">
+      <div className="flex items-center p-2 pl-4 gap-1 group">
         <Link
           to={`/categories/${parentCategory?.id}/${slugify(
             parentCategory?.name
           )}/${subCategory?.id}/${slugify(subCategory?.name)}`}
-          className="flex-1 flex items-center gap-1">
+          className="flex-1 flex items-center gap-1 group-hover:bg-primary/5 rounded-r">
           <div className="w-10 h-10 rounded overflow-hidden flex-shrink-0 bg-muted relative">
             {subCategory?.icon ? (
               <img

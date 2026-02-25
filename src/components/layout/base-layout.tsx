@@ -10,6 +10,8 @@ import { useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import { Footer } from "./footer";
 import nprogress from "nprogress";
+import "nprogress/nprogress.css";
+nprogress.configure({ showSpinner: false });
 
 interface Props {
   children: React.ReactNode;

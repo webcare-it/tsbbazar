@@ -195,7 +195,7 @@ export const WhatOurCustomersSaySection = ({ info }: Props) => {
                 <OptimizedImage
                   src={img || ""}
                   alt={`Customer Review ${index + 1}`}
-                  className="w-full min-h-80 h-auto object-contain rounded-lg"
+                  className="aspect-[16/22] h-auto object-contain rounded-lg"
                 />
               </div>
             </SwiperSlide>

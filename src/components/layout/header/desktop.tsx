@@ -27,7 +27,7 @@ export const HeaderDesktop = ({
 
   return (
     <nav className="hidden md:block bg-background">
-      <div className="h-14 md:flex items-center justify-center w-full px-1 md:px-0 border-b">
+      <div className="h-16 md:flex items-center justify-center w-full px-1 md:px-0 border-b">
         <div className="container flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 justify-start">
             <Logo type="DESKTOP" />
@@ -55,7 +55,7 @@ export const HeaderDesktop = ({
                   pathname.pathname === "/wishlist" ? "text-primary" : ""
                 }`}>
                 <div title="Wishlist" className="relative">
-                  <Heart className="h-6 w-6" />
+                  <Heart strokeWidth={2.5} absoluteStrokeWidth />
                   {wishlist?.items?.length > 0 && (
                     <span className="absolute -top-2.5 -right-2.5 bg-primary text-white rounded-full text-[10px] font-medium w-4 h-4 flex items-center justify-center">
                       {wishlist?.items?.length}
@@ -74,7 +74,7 @@ export const HeaderDesktop = ({
                   pathname.pathname === "/cart" ? "text-primary" : ""
                 }`}>
                 <div title="Shopping Cart" className="relative">
-                  <ShoppingCart className="h-6 w-6" />
+                  <ShoppingCart strokeWidth={2.5} absoluteStrokeWidth />
                   {cart?.items?.length > 0 && (
                     <span className="absolute -top-2.5 -right-2.5 bg-primary text-white rounded-full text-[10px] font-medium w-4 h-4 flex items-center justify-center">
                       {cart?.items?.length}
