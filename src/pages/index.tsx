@@ -9,11 +9,7 @@ import { ProductsPage } from "./products";
 import { ProductDetailsPage } from "./details";
 import { WishlistPrivatePage, WishlistPublicPage } from "./wishlist";
 import { CartPage } from "./cart";
-import {
-  CategoriesProductPage,
-  CategoriesSubCategoryProductPage,
-  CategoriesSubSubCategoryProductPage,
-} from "./categories/product";
+import { CategoriesProductPage, CategoriesSubCategoryProductPage, CategoriesSubSubCategoryProductPage } from "./categories/product";
 import { CheckoutPage } from "./checkout";
 import { PolicyPage } from "./policy";
 import { OrderDetailsPage } from "./orders/id";
@@ -41,14 +37,8 @@ export const AppRoutes = () => {
       <Route path="/search" element={<SearchPage />} />
       <Route path="/categories" element={<CategoriesPage />} />
       <Route path="/categories/:id/:name" element={<CategoriesProductPage />} />
-      <Route
-        path="/categories/:id/:name/:subId/:subName"
-        element={<CategoriesSubCategoryProductPage />}
-      />
-      <Route
-        path="/categories/:id/:name/:subId/:subName/:subSubId/:subSubName"
-        element={<CategoriesSubSubCategoryProductPage />}
-      />
+      <Route path="/categories/:id/:name/:subId/:subName" element={<CategoriesSubCategoryProductPage />} />
+      <Route path="/categories/:id/:name/:subId/:subName/:subSubId/:subSubName" element={<CategoriesSubSubCategoryProductPage />} />
       <Route path="/brands/:id/:name" element={<BrandsPage />} />
       <Route path="/products" element={<ProductsPage />} />
       <Route path="/products/:id/:name" element={<ProductDetailsPage />} />

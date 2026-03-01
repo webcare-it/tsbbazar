@@ -6,12 +6,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import { Logo } from "@/components/layout/header/logo";
 import type { LandingPageType } from "./type";
-import { getImageUrl } from "@/helper";
+import { getConfig, getImageUrl } from "@/helper";
 import { useEffect, useState } from "react";
-import {
-  OptimizedBannerImage,
-  OptimizedImage,
-} from "@/components/common/optimized-image";
+import { OptimizedBannerImage, OptimizedImage } from "@/components/common/optimized-image";
+import { useConfig } from "@/hooks/useConfig";
 
 interface Props {
   info: LandingPageType;
@@ -24,10 +22,7 @@ interface TitleProps {
 
 export const HeaderSection = () => {
   return (
-    <motion.header
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}>
+    <motion.header initial={{ y: -100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.8, ease: "easeOut" }}>
       <div className="px-4 sm:px-0 mb-8">
         <div className="flex justify-center items-center">
           <Logo type="LANDING-PAGE" />
@@ -39,15 +34,8 @@ export const HeaderSection = () => {
 
 export const Title = ({ children, className }: TitleProps) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      viewport={{ once: true }}
-      className={cn(className)}>
-      <motion.h1
-        className="text-4xl pb-6 md:pb-8 text-center md:text-6xl font-bold text-primary"
-        style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)" }}>
+    <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }} className={cn(className)}>
+      <motion.h1 className="text-4xl pb-6 md:pb-8 text-center md:text-6xl font-bold text-primary" style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)" }}>
         {children}
       </motion.h1>
     </motion.div>
@@ -56,15 +44,8 @@ export const Title = ({ children, className }: TitleProps) => {
 
 export const SubTitle = ({ children, className }: TitleProps) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      viewport={{ once: true }}
-      className={cn("pb-4 md:pb-6", className)}>
-      <motion.h2
-        className="text-2xl text-center md:text-4xl font-bold text-muted-foreground"
-        style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)" }}>
+    <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }} className={cn("pb-4 md:pb-6", className)}>
+      <motion.h2 className="text-2xl text-center md:text-4xl font-bold text-muted-foreground" style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)" }}>
         {children}
       </motion.h2>
     </motion.div>
@@ -98,11 +79,7 @@ export const ProductShowcaseSection = ({ info }: Props) => {
             <SwiperSlide key={index}>
               <div className="px-2">
                 <div className="rounded-lg bg-blue-50 border border-blue-100 shadow-md overflow-hidden relative aspect-[16/20]">
-                  <OptimizedImage
-                    src={images?.[imageIndex] || ""}
-                    alt={`Product ${index + 1}`}
-                    className="w-full h-full absolute object-cover"
-                  />
+                  <OptimizedImage src={images?.[imageIndex] || ""} alt={`Product ${index + 1}`} className="w-full h-full absolute object-cover" />
                 </div>
               </div>
             </SwiperSlide>
@@ -138,16 +115,9 @@ export const BenefitsSection = ({ info }: Props) => {
     return textContent.trim().length > 0;
   };
 
-  const features = [
-    info?.feature_1,
-    info?.feature_2,
-    info?.feature_3,
-    info?.feature_4,
-    info?.feature_5,
-    info?.feature_6,
-    info?.feature_7,
-    info?.feature_8,
-  ].filter((feature) => hasTextContent(feature));
+  const features = [info?.feature_1, info?.feature_2, info?.feature_3, info?.feature_4, info?.feature_5, info?.feature_6, info?.feature_7, info?.feature_8].filter((feature) =>
+    hasTextContent(feature),
+  );
 
   if (features?.length === 0) {
     return null;
@@ -156,19 +126,15 @@ export const BenefitsSection = ({ info }: Props) => {
   return (
     <div>
       <Title>{info?.short_description} </Title>
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-4 items-baseline md:gap-6">
-        {features &&
-          features?.map((feature, index) => (
-            <div key={index}>{renderHtml(feature)}</div>
-          ))}
+      <div className={`grid grid-cols-1 gap-8 md:grid-cols-${features?.length} items-baseline md:gap-6`}>
+        {features && features?.map((feature, index) => <div key={index}>{renderHtml(feature)}</div>)}
       </div>
     </div>
   );
 };
 
 export const WhatOurCustomersSaySection = ({ info }: Props) => {
-  const images =
-    info?.reviews?.map((img) => getImageUrl(img?.review_image)) || [];
+  const images = info?.reviews?.map((img) => getImageUrl(img?.review_image)) || [];
 
   return images?.length > 0 ? (
     <div>
@@ -192,11 +158,7 @@ export const WhatOurCustomersSaySection = ({ info }: Props) => {
           images?.map((img, index) => (
             <SwiperSlide key={index}>
               <div className="rounded-lg bg-blue-50 border border-blue-100 shadow-md overflow-hidden cursor-grab">
-                <OptimizedImage
-                  src={img || ""}
-                  alt={`Customer Review ${index + 1}`}
-                  className="aspect-[16/22] h-auto object-contain rounded-lg"
-                />
+                <OptimizedImage src={img || ""} alt={`Customer Review ${index + 1}`} className="aspect-[16/22] h-auto object-contain rounded-lg" />
               </div>
             </SwiperSlide>
           ))}
@@ -208,9 +170,7 @@ export const WhatOurCustomersSaySection = ({ info }: Props) => {
 
 export const OrderButton = () => {
   const scrollToOrder = () => {
-    document
-      .getElementById("order-section")
-      ?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById("order-section")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -247,11 +207,7 @@ export const BannerSection = ({ info }: Props) => {
     <div>
       {info?.banner_image ? (
         <div className="relative aspect-video rounded-lg overflow-hidden">
-          <OptimizedBannerImage
-            src={info?.banner_image}
-            alt="banner"
-            className="w-full h-full object-cover absolute"
-          />
+          <OptimizedBannerImage src={info?.banner_image} alt="banner" className="w-full h-full object-cover absolute" />
         </div>
       ) : null}
       {info?.banner_image ? <OrderButton /> : null}
@@ -264,11 +220,7 @@ export const VideoSection = ({ info }: Props) => {
     <div>
       {info?.video_id ? (
         <div className="aspect-video relative rounded-lg overflow-hidden">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}>
+          <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }}>
             <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden mx-auto">
               <iframe
                 width="100%"
@@ -307,9 +259,7 @@ export const DateCounter = ({ date }: { date: string }) => {
       if (distance > 0) {
         setTimeLeft({
           days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-          hours: Math.floor(
-            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-          ),
+          hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
           minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
           seconds: Math.floor((distance % (1000 * 60)) / 1000),
         });
@@ -325,56 +275,32 @@ export const DateCounter = ({ date }: { date: string }) => {
 
   return (
     <div className="flex flex-col items-center">
-      <motion.h2
-        className="text-3xl font-bold text-foreground mb-6"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}>
+      <motion.h2 className="text-3xl font-bold text-foreground mb-6" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
         {"Offer Ends In"}
       </motion.h2>
 
       <div className="flex gap-2 md:gap-4">
-        <motion.div
-          className="flex flex-col items-center"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.1 }}>
+        <motion.div className="flex flex-col items-center" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 0.1 }}>
           <motion.div
             className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-red-500 to-orange-500 rounded-lg flex items-center justify-center shadow-lg"
             animate={{
-              boxShadow: [
-                "0 0 0px rgba(239, 68, 68, 0.5)",
-                "0 0 20px rgba(239, 68, 68, 0.8)",
-                "0 0 0px rgba(239, 68, 68, 0.5)",
-              ],
+              boxShadow: ["0 0 0px rgba(239, 68, 68, 0.5)", "0 0 20px rgba(239, 68, 68, 0.8)", "0 0 0px rgba(239, 68, 68, 0.5)"],
             }}
             transition={{
               duration: 2,
               repeat: Infinity,
               ease: "easeInOut",
             }}>
-            <span className="text-2xl md:text-3xl font-bold text-white">
-              {timeLeft.days.toString().padStart(2, "0")}
-            </span>
+            <span className="text-2xl md:text-3xl font-bold text-white">{timeLeft.days.toString().padStart(2, "0")}</span>
           </motion.div>
-          <span className="mt-2 text-sm font-semibold text-muted-foreground">
-            {"Days"}
-          </span>
+          <span className="mt-2 text-sm font-semibold text-muted-foreground">{"Days"}</span>
         </motion.div>
 
-        <motion.div
-          className="flex flex-col items-center"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}>
+        <motion.div className="flex flex-col items-center" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 0.2 }}>
           <motion.div
             className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center shadow-lg"
             animate={{
-              boxShadow: [
-                "0 0 0px rgba(59, 130, 246, 0.5)",
-                "0 0 20px rgba(59, 130, 246, 0.8)",
-                "0 0 0px rgba(59, 130, 246, 0.5)",
-              ],
+              boxShadow: ["0 0 0px rgba(59, 130, 246, 0.5)", "0 0 20px rgba(59, 130, 246, 0.8)", "0 0 0px rgba(59, 130, 246, 0.5)"],
             }}
             transition={{
               duration: 2,
@@ -382,28 +308,16 @@ export const DateCounter = ({ date }: { date: string }) => {
               ease: "easeInOut",
               delay: 0.5,
             }}>
-            <span className="text-2xl md:text-3xl font-bold text-white">
-              {timeLeft.hours.toString().padStart(2, "0")}
-            </span>
+            <span className="text-2xl md:text-3xl font-bold text-white">{timeLeft.hours.toString().padStart(2, "0")}</span>
           </motion.div>
-          <span className="mt-2 text-sm font-semibold text-muted-foreground">
-            {"Hours"}
-          </span>
+          <span className="mt-2 text-sm font-semibold text-muted-foreground">{"Hours"}</span>
         </motion.div>
 
-        <motion.div
-          className="flex flex-col items-center"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.3 }}>
+        <motion.div className="flex flex-col items-center" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 0.3 }}>
           <motion.div
             className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center shadow-lg"
             animate={{
-              boxShadow: [
-                "0 0 0px rgba(34, 197, 94, 0.5)",
-                "0 0 20px rgba(34, 197, 94, 0.8)",
-                "0 0 0px rgba(34, 197, 94, 0.5)",
-              ],
+              boxShadow: ["0 0 0px rgba(34, 197, 94, 0.5)", "0 0 20px rgba(34, 197, 94, 0.8)", "0 0 0px rgba(34, 197, 94, 0.5)"],
             }}
             transition={{
               duration: 2,
@@ -411,28 +325,16 @@ export const DateCounter = ({ date }: { date: string }) => {
               ease: "easeInOut",
               delay: 1,
             }}>
-            <span className="text-2xl md:text-3xl font-bold text-white">
-              {timeLeft.minutes.toString().padStart(2, "0")}
-            </span>
+            <span className="text-2xl md:text-3xl font-bold text-white">{timeLeft.minutes.toString().padStart(2, "0")}</span>
           </motion.div>
-          <span className="mt-2 text-sm font-semibold text-muted-foreground">
-            {"Minutes"}
-          </span>
+          <span className="mt-2 text-sm font-semibold text-muted-foreground">{"Minutes"}</span>
         </motion.div>
 
-        <motion.div
-          className="flex flex-col items-center"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}>
+        <motion.div className="flex flex-col items-center" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, delay: 0.4 }}>
           <motion.div
             className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center shadow-lg"
             animate={{
-              boxShadow: [
-                "0 0 0px rgba(168, 85, 247, 0.5)",
-                "0 0 20px rgba(168, 85, 247, 0.8)",
-                "0 0 0px rgba(168, 85, 247, 0.5)",
-              ],
+              boxShadow: ["0 0 0px rgba(168, 85, 247, 0.5)", "0 0 20px rgba(168, 85, 247, 0.8)", "0 0 0px rgba(168, 85, 247, 0.5)"],
               scale: [1, 1.1, 1],
             }}
             transition={{
@@ -440,25 +342,14 @@ export const DateCounter = ({ date }: { date: string }) => {
               repeat: Infinity,
               ease: "easeInOut",
             }}>
-            <span className="text-2xl md:text-3xl font-bold text-white">
-              {timeLeft.seconds.toString().padStart(2, "0")}
-            </span>
+            <span className="text-2xl md:text-3xl font-bold text-white">{timeLeft.seconds.toString().padStart(2, "0")}</span>
           </motion.div>
-          <span className="mt-2 text-sm font-semibold text-muted-foreground">
-            {"Seconds"}
-          </span>
+          <span className="mt-2 text-sm font-semibold text-muted-foreground">{"Seconds"}</span>
         </motion.div>
       </div>
-      <motion.div
-        className="mt-2 text-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 0.5 }}>
+      <motion.div className="mt-2 text-center" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 0.5 }}>
         <p className="text-lg font-semibold text-gray-700">
-          {"Deadline"}:{" "}
-          <span className="text-red-600 font-bold">
-            {new Date(date).toLocaleDateString()}
-          </span>
+          {"Deadline"}: <span className="text-red-600 font-bold">{new Date(date).toLocaleDateString()}</span>
         </p>
       </motion.div>
       <motion.div
@@ -535,11 +426,7 @@ export const PriceTicker = ({ info }: Props) => {
           </div>
 
           <div className="flex items-center justify-center gap-4">
-            <motion.h2
-              className="text-white text-xl md:text-2xl font-bold z-10 relative"
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3 }}>
+            <motion.h2 className="text-white text-xl md:text-2xl font-bold z-10 relative" initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.3 }}>
               {currentPrice.previousText}
             </motion.h2>
             <div className="flex flex-col md:flex-row items-center justify-between gap-4 z-10 relative">
@@ -555,16 +442,8 @@ export const PriceTicker = ({ info }: Props) => {
                     {currentPrice.original}
                   </motion.div>
 
-                  <motion.div
-                    className="absolute inset-0 flex items-center justify-center"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1 }}>
-                    <motion.svg
-                      width="100%"
-                      height="100%"
-                      viewBox="0 0 100 40"
-                      className="absolute">
+                  <motion.div className="absolute inset-0 flex items-center justify-center" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
+                    <motion.svg width="100%" height="100%" viewBox="0 0 100 40" className="absolute">
                       <motion.path
                         d="M 20 20 L 80 20"
                         stroke="red"
@@ -598,11 +477,7 @@ export const PriceTicker = ({ info }: Props) => {
             </div>
           </div>
           <div className="flex items-center justify-center gap-4">
-            <motion.h2
-              className="text-white text-xl md:text-2xl font-bold z-10 relative"
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3 }}>
+            <motion.h2 className="text-white text-xl md:text-2xl font-bold z-10 relative" initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.3 }}>
               {currentPrice.offerText}
             </motion.h2>
             <div className="flex flex-col md:flex-row items-center justify-between gap-4 z-10 relative">
@@ -622,11 +497,7 @@ export const PriceTicker = ({ info }: Props) => {
                     {currentPrice.discounted}
                   </motion.div>
 
-                  <motion.svg
-                    className="absolute inset-0 -left-6 -top-6"
-                    width="180"
-                    height="80"
-                    viewBox="0 0 180 80">
+                  <motion.svg className="absolute inset-0 -left-6 -top-6" width="180" height="80" viewBox="0 0 180 80">
                     <motion.path
                       d="M 90 15 A 75 30 0 1 0 90.1 15"
                       fill="none"
@@ -654,11 +525,13 @@ export const PriceTicker = ({ info }: Props) => {
 };
 
 export const FooterLanding = () => {
+  const config = useConfig();
+  const copyright = (getConfig(config, "frontend_copyright_text")?.value as string) || `<p>${new Date().getFullYear()} All rights reserved. </p>`;
   return (
     <div className="h-20 bg-gray-900 mt-10 flex items-center justify-center">
-      <span className="font-medium text-base text-white">
-        © {`${new Date().getFullYear()} ${"All rights reserved."}`}
-      </span>
+      <div className="flex justify-center gap-1">
+        ©<p className="w-full text-white overflow-hidden flex" dangerouslySetInnerHTML={{ __html: copyright }} />
+      </div>
     </div>
   );
 };
