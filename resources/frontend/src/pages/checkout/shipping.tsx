@@ -8,10 +8,9 @@ import { cn } from "@/lib/utils";
 import type { ShippingType } from "@/type";
 import { Truck } from "lucide-react";
 import { toast } from "react-hot-toast";
-import { getConfig, getGuestUserId, getUserId } from "@/helper";
+import { getGuestUserId, getUserId } from "@/helper";
 import { revalidateQueryFn } from "@/lib/query-client";
 import { apiErrorHandler } from "@/api/utils/error";
-import { useConfig } from "@/hooks/useConfig";
 
 interface Props {
     selectedShipping: string;
@@ -182,11 +181,8 @@ export const ShippingCost = ({
 };
 
 export const ShippingCostForDetails = () => {
-    const config = useConfig();
     const { data, isLoading } = useShippingCost();
 
-    const phone = getConfig(config, "contact_phone")?.value as string;
-    const bkashNumber = getConfig(config, "bkash_number")?.value as string;
 
     const shippingOption = useMemo(
         () => (data?.data as ShippingType[]) || [],
@@ -226,14 +222,6 @@ export const ShippingCostForDetails = () => {
                     </div>
                 </li>
             ))}
-            <li className="flex items-center justify-between gap-4">
-                <div className="text-sm font-medium text-foreground">
-                    Bkash Number :
-                </div>
-                <div className="text-base text-foreground font-semibold">
-                    {bkashNumber || phone}
-                </div>
-            </li>
         </ul>
     );
 };
