@@ -68,7 +68,7 @@ class HomeCategoryController extends Controller
 
             // Get categories with their products including subcategories and sub-subcategories
             $result = [];
-            $categories = Category::whereIn('id', $category_ids)->get();
+            $categories = Category::whereIn('id', $category_ids)->orderByRaw("FIELD(id, " . implode(',', $category_ids) . ")")->get();
             
             foreach ($categories as $category) {
                 // Get all subcategory IDs for this category (children categories)
